@@ -31,27 +31,27 @@ interface Product {
 const PRODUCTS: Product[] = [
   {
     id: '1',
-    name: 'Midnight Silk Velvet',
-    category: 'Silk Velvet Collection',
-    price: 'PKR 18,500',
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop',
-    details: ['Liquid Ammonia Finish', 'Embroidered Borders', 'Pure Silk Blend']
+    name: 'Midnight Royal Boski',
+    category: 'Premium Wash & Wear',
+    price: 'PKR 8,500',
+    image: 'https://images.unsplash.com/photo-1597983073491-03462a7b8e8f?auto=format&fit=crop&q=80&w=2000',
+    details: ['Liquid Ammonia Finish', 'Anti-Crease Technology', 'Luxury Fall & Drape']
   },
   {
     id: '2',
-    name: 'Ivory Filigree Lawn',
-    category: 'Lawn 2026',
+    name: 'Presidential Giza Cotton',
+    category: 'Egyptian Series 2026',
     price: 'PKR 12,900',
-    image: 'https://images.unsplash.com/photo-1590739225287-bd31519780c3?q=80&w=2000&auto=format&fit=crop',
-    details: ['Egyptian Cotton', 'Schiffli Work', 'Hand-cut Embroidery']
+    image: 'https://images.unsplash.com/photo-1621335829175-95f437384d7c?auto=format&fit=crop&q=80&w=2000',
+    details: ['100% Giza Cotton', 'High-Density Fine Weave', 'Crisp Executive Finish']
   },
   {
     id: '3',
-    name: 'Antique Gold Jacquard',
-    category: 'Heritage Series',
-    price: 'PKR 15,000',
-    image: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=2000&auto=format&fit=crop',
-    details: ['Zari Weave', 'High-density Threadcount', 'Tilla Accents']
+    name: 'Slate Shadow Latha',
+    category: 'Heritage Cotton',
+    price: 'PKR 9,500',
+    image: 'https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?auto=format&fit=crop&q=80&w=2000',
+    details: ['Traditional Long-Staple', 'Starch-Ready Texture', 'Original Heritage 0.5']
   }
 ];
 
@@ -125,7 +125,7 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.2 }}
           className="uppercase text-xs tracking-[0.4em] font-semibold text-primary mb-6"
         >
-          Collection 2026
+          Men's Collection 2026
         </motion.p>
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
@@ -133,7 +133,7 @@ const Hero = () => {
           transition={{ duration: 1.2, delay: 0.4 }}
           className="text-7xl md:text-8xl font-serif font-light tracking-tight max-w-4xl text-[#F8F5F2] leading-[0.9] mb-12"
         >
-          The Art of <br/> <span className="italic font-light">Unstitched</span>
+          Men's <span className="italic font-light">Unstitched</span> <br/> Luxury
         </motion.h1>
         <motion.div
            initial={{ opacity: 0 }}
