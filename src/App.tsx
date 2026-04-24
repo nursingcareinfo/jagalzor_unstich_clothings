@@ -31,33 +31,83 @@ interface Product {
 const PRODUCTS: Product[] = [
   {
     id: '1',
-    name: 'Midnight Royal Boski',
-    category: 'Premium Wash & Wear',
+    name: 'Obsidian Royal Boski',
+    category: 'Elite Wash & Wear',
     price: 'PKR 8,500',
-    image: 'https://images.unsplash.com/photo-1597983073491-03462a7b8e8f?auto=format&fit=crop&q=80&w=2000',
+    image: '/235559a993082128adece399fa8d92ac-473599044.jpg',
     details: ['Liquid Ammonia Finish', 'Anti-Crease Technology', 'Luxury Fall & Drape']
   },
   {
     id: '2',
-    name: 'Presidential Giza Cotton',
-    category: 'Egyptian Series 2026',
+    name: 'Slate Executive Cotton',
+    category: 'Executive Series 2026',
     price: 'PKR 12,900',
-    image: 'https://images.unsplash.com/photo-1621335829175-95f437384d7c?auto=format&fit=crop&q=80&w=2000',
+    image: '/2f894674bed7377fa07612de9c67759a-2235079211.jpg',
     details: ['100% Giza Cotton', 'High-Density Fine Weave', 'Crisp Executive Finish']
   },
   {
     id: '3',
-    name: 'Slate Shadow Latha',
-    category: 'Heritage Cotton',
+    name: 'Maroon Heritage Karandi',
+    category: 'Heritage Series',
     price: 'PKR 9,500',
-    image: 'https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?auto=format&fit=crop&q=80&w=2000',
+    image: '/41_9d3f1113-78f0-481f-9cd5-3e12d845849b_1800x1800-2050243805.jpg',
     details: ['Traditional Long-Staple', 'Starch-Ready Texture', 'Original Heritage 0.5']
+  },
+  {
+    id: '4',
+    name: 'Desert Tan Latha',
+    category: 'Winter Collection',
+    price: 'PKR 11,200',
+    image: '/7aad2056fb17541456016cf623c6ac70-2904060245.jpg',
+    details: ['Heavyweight Weave', 'Warm Texture', 'Deep Pigment Dye']
+  },
+  {
+    id: '5',
+    name: 'Royal Sunray Mustard',
+    category: 'Cotton Blend',
+    price: 'PKR 7,800',
+    image: '/MKS-8336-3-1639371118.jpg',
+    details: ['Folded detailing', 'Self-Print Border', 'Breathable Summer Wear']
+  },
+  {
+    id: '6',
+    name: 'Azure Mist Lawn',
+    category: 'Spring Series',
+    price: 'PKR 8,900',
+    image: '/SK-48-1-scaled-1123149132.jpg',
+    details: ['Ultra Light-weight', 'Sky Blue Hue', 'Silky Smooth Finish']
+  },
+  {
+    id: '7',
+    name: 'Rose Dusk Executive',
+    category: 'Elite Series',
+    price: 'PKR 10,500',
+    image: '/pakistani_gents_shalwar_kameez-2963876879.jpg',
+    details: ['Soft-Touch Finish', 'Earthy Tones', 'Modern Fit Silhouette']
+  },
+  {
+    id: '8',
+    name: 'Coffee Brown Heritage',
+    category: 'Classical Collection',
+    price: 'PKR 9,200',
+    image: '/Wash-Wear-Gents-Shalwar-Qameez-GS44-1-2025904109.webp',
+    details: ['Traditional Stitched Look', 'Sturdy Cotton', 'Timeless Appeal']
   }
 ];
 
 // --- Components ---
 
-const Navbar = () => {
+const Navbar = ({ 
+  isSearchOpen, 
+  setIsSearchOpen, 
+  searchQuery, 
+  setSearchQuery 
+}: { 
+  isSearchOpen: boolean, 
+  setIsSearchOpen: (v: boolean) => void, 
+  searchQuery: string, 
+  setSearchQuery: (v: string) => void 
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -69,26 +119,57 @@ const Navbar = () => {
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-6 px-8 flex items-center justify-between",
-      isScrolled ? "bg-white/5 backdrop-blur-md border-b border-white/10 py-4" : "bg-transparent"
+      isScrolled || isSearchOpen ? "bg-white/5 backdrop-blur-md border-b border-white/10 py-4" : "bg-transparent"
     )}>
       <div className="flex items-center gap-8">
         <Menu className="w-5 h-5 cursor-pointer hover:text-primary transition-colors" />
         <div className="hidden md:flex gap-6 uppercase text-[10px] tracking-[0.2em] font-medium">
-          <a href="#" className="hover:text-primary transition-colors">Collections</a>
-          <a href="#" className="hover:text-primary transition-colors">Bespoke Fitting</a>
-          <a href="#" className="hover:text-primary transition-colors">Heritage</a>
+          <a href="#" className="hover:text-primary transition-colors text-foreground">Collections</a>
+          <a href="#" className="hover:text-primary transition-colors text-foreground">Bespoke Fitting</a>
+          <a href="#" className="hover:text-primary transition-colors text-foreground">Heritage</a>
         </div>
       </div>
 
-      <div className="absolute left-1/2 -translate-x-1/2 text-2xl font-serif tracking-tighter uppercase font-medium">
-        Velvet <span className="text-primary">&</span> Loom
+      <div className={cn(
+        "absolute left-1/2 -translate-x-1/2 transition-all duration-500 flex items-center gap-4",
+        isSearchOpen ? "w-full max-w-md" : "w-auto"
+      )}>
+        {isSearchOpen ? (
+          <div className="w-full relative flex items-center flex-1">
+            <input 
+              autoFocus
+              type="text" 
+              placeholder="Search Shalwar Kameez..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-white/10 border border-white/20 rounded-full py-2 px-10 outline-none text-sm text-foreground focus:border-primary/50 transition-all"
+            />
+            <Search className="absolute left-4 w-4 h-4 text-white/40" />
+            <X 
+              className="absolute right-4 w-4 h-4 text-white/40 cursor-pointer hover:text-white" 
+              onClick={() => {
+                setIsSearchOpen(false);
+                setSearchQuery('');
+              }}
+            />
+          </div>
+        ) : (
+          <div className="text-2xl font-serif tracking-tighter uppercase font-medium text-foreground">
+            Velvet <span className="text-primary">&</span> Loom
+          </div>
+        )}
       </div>
 
       <div className="flex items-center gap-6">
-        <Search className="w-5 h-5 cursor-pointer hover:text-primary transition-colors" />
-        <User className="w-5 h-5 cursor-pointer hover:text-primary transition-colors" />
+        {!isSearchOpen && (
+          <Search 
+            className="w-5 h-5 cursor-pointer hover:text-primary transition-colors text-foreground" 
+            onClick={() => setIsSearchOpen(true)}
+          />
+        )}
+        <User className="w-5 h-5 cursor-pointer hover:text-primary transition-colors text-foreground" />
         <div className="relative cursor-pointer group">
-          <ShoppingBag className="w-5 h-5 group-hover:text-primary transition-colors" />
+          <ShoppingBag className="w-5 h-5 group-hover:text-primary transition-colors text-foreground" />
           <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-[8px] w-4 h-4 flex items-center justify-center rounded-full font-bold">3</span>
         </div>
       </div>
@@ -108,9 +189,9 @@ const Hero = () => {
         className="absolute inset-0 z-0"
       >
         <img 
-          src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=3000&auto=format&fit=crop" 
-          alt="Luxury Fabric" 
-          className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
+          src="/Wash-Wear-Gents-Shalwar-Qameez-GS45-1.webp" 
+          alt="Luxury Men's Tailoring" 
+          className="w-full h-full object-cover opacity-50 mix-blend-normal scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-transparent to-transparent" />
       </motion.div>
@@ -222,7 +303,7 @@ const StorySection = () => {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.8 }}
-              src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=2000&auto=format&fit=crop" 
+              src="/pakistani_gents_shalwar_kameez-2963876879.jpg" 
               className="w-full h-full object-cover"
               alt="Fabric Detail"
             />
@@ -233,7 +314,7 @@ const StorySection = () => {
   );
 };
 
-const ProductGrid = () => {
+const ProductGrid = ({ products }: { products: Product[] }) => {
   return (
     <section className="py-32 bg-transparent">
       <div className="flex flex-col md:flex-row items-baseline justify-between mb-24 gap-8">
@@ -241,46 +322,54 @@ const ProductGrid = () => {
           <h3 className="text-5xl font-serif font-light mb-4 text-foreground leading-[0.9]">The Collection</h3>
           <p className="text-white/60 font-light text-sm tracking-wide">High-fidelity Egyptian Cotton engineered for the silhouette.</p>
         </div>
-        <Tabs defaultValue="all" className="w-full md:w-auto">
-          <TabsList className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-1 h-auto">
-            <TabsTrigger value="all" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-background px-6 py-2 uppercase text-[10px] tracking-widest font-bold transition-all">All</TabsTrigger>
-            <TabsTrigger value="velvet" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-background px-6 py-2 uppercase text-[10px] tracking-widest font-bold transition-all">Velvet</TabsTrigger>
-            <TabsTrigger value="lawn" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-background px-6 py-2 uppercase text-[10px] tracking-widest font-bold transition-all">Lawn</TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          <Tabs defaultValue="all" className="w-full md:w-auto">
+            <TabsList className="bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-1 h-auto">
+              <TabsTrigger value="all" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-background px-6 py-2 uppercase text-[10px] tracking-widest font-bold transition-all">All</TabsTrigger>
+              <TabsTrigger value="velvet" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-background px-6 py-2 uppercase text-[10px] tracking-widest font-bold transition-all">Velvet</TabsTrigger>
+              <TabsTrigger value="lawn" className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-background px-6 py-2 uppercase text-[10px] tracking-widest font-bold transition-all">Lawn</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {PRODUCTS.map((product) => (
-          <motion.div 
-            key={product.id}
-            whileHover={{ y: -10 }}
-            className="group cursor-pointer"
-          >
-            <Card className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden shadow-2xl transition-all hover:bg-white/10">
-              <AspectRatio ratio={4/5} className="bg-muted relative overflow-hidden">
-                 <img 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                  <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-white/20 backdrop-blur-md bg-white/10">
-                    <Maximize2 className="w-5 h-5 text-white" />
-                  </Button>
-                </div>
-              </AspectRatio>
-              <CardContent className="p-8">
-                <p className="text-[10px] uppercase tracking-widest text-primary font-bold mb-2">{product.category}</p>
-                <div className="flex justify-between items-start mb-4">
-                  <h4 className="text-2xl font-serif text-[#F8F5F2]">{product.name}</h4>
-                  <p className="text-sm font-medium text-primary">{product.price}</p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
+      {products.length === 0 ? (
+        <div className="text-center py-20 border border-dashed border-white/10 rounded-3xl">
+          <p className="text-white/40 font-serif italic text-2xl">No garments match your search criteria.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {products.map((product) => (
+            <motion.div 
+              key={product.id}
+              whileHover={{ y: -10 }}
+              className="group cursor-pointer"
+            >
+              <Card className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden shadow-2xl transition-all hover:bg-white/10">
+                <AspectRatio ratio={4/5} className="bg-muted relative overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-white/20 backdrop-blur-md bg-white/10">
+                      <Maximize2 className="w-5 h-5 text-white" />
+                    </Button>
+                  </div>
+                </AspectRatio>
+                <CardContent className="p-8">
+                  <p className="text-[10px] uppercase tracking-widest text-primary font-bold mb-2">{product.category}</p>
+                  <div className="flex justify-between items-start mb-4">
+                    <h4 className="text-2xl font-serif text-[#F8F5F2]">{product.name}</h4>
+                    <p className="text-sm font-medium text-primary">{product.price}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
@@ -317,7 +406,7 @@ const FabricZoomViewer = () => {
                onClick={() => setZoomLevel(zoomLevel === 1 ? 2.5 : 1)}
              >
                 <img 
-                  src="https://images.unsplash.com/photo-1590739225287-bd31519780c3?q=80&w=3000&auto=format&fit=crop" 
+                  src="/Wash-Wear-Gents-Shalwar-Qameez-GS44-1-2025904109.webp" 
                   alt="Micro Fabric" 
                   className="w-full h-full object-cover mix-blend-overlay opacity-60"
                 />
@@ -360,9 +449,9 @@ const Footer = () => {
         <div className="space-y-6">
           <h5 className="text-[10px] uppercase font-bold tracking-[0.2em] text-foreground">Contact</h5>
           <div className="space-y-3 text-sm font-light text-[#F8F5F2]/60">
-            <p>Atelier Karachi: Korangi Industrial Zone</p>
-            <p>concierge@velvetandloom.com</p>
-            <p>+92 21 3567-8901</p>
+            <p>Digital Atelier: trinity_coders.dev</p>
+            <p>theo@trinity_coders.dev</p>
+            <p>+00 123 456 7890</p>
           </div>
         </div>
 
@@ -377,7 +466,7 @@ const Footer = () => {
       </div>
       
       <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/10 gap-6">
-        <div className="text-[9px] uppercase tracking-widest font-bold opacity-40 text-foreground">© 2026 Velvet & Loom. All Rights Reserved.</div>
+        <div className="text-[9px] uppercase tracking-widest font-bold opacity-40 text-foreground">© 2026 Velvet & Loom. Crafted by Thio.</div>
         <div className="flex gap-8 text-[9px] uppercase tracking-widest font-bold opacity-40 text-foreground">
           <a href="#" className="hover:opacity-100 transition-opacity">Privacy</a>
           <a href="#" className="hover:opacity-100 transition-opacity">Terms of Craft</a>
@@ -390,11 +479,18 @@ const Footer = () => {
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  const filteredProducts = PRODUCTS.filter(product => 
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary selection:text-primary-foreground relative overflow-x-hidden">
@@ -402,7 +498,7 @@ export default function App() {
       <div className="fixed top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary opacity-10 rounded-full blur-[120px] pointer-events-none z-0" />
       <div className="fixed bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-900 opacity-20 rounded-full blur-[100px] pointer-events-none z-0" />
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {loading ? (
           <motion.div 
             key="loader"
@@ -433,11 +529,16 @@ export default function App() {
             transition={{ duration: 1 }}
             className="relative z-10"
           >
-            <Navbar />
+            <Navbar 
+              isSearchOpen={isSearchOpen} 
+              setIsSearchOpen={setIsSearchOpen}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
             <Hero />
             <div className="px-8 md:px-24">
                <StorySection />
-               <ProductGrid />
+               <ProductGrid products={filteredProducts} />
                <FabricZoomViewer />
             </div>
             <Footer />
