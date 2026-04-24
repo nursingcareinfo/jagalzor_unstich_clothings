@@ -18,6 +18,10 @@ import { cn } from '@/lib/utils';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Use relative paths for GitHub Pages subdirectory compatibility.
+// "./image.jpg" resolves from current URL path, whether at root (localhost)
+// or at /repo-name/ (GitHub Pages).
+
 // --- Types ---
 interface Product {
   id: string;
@@ -34,7 +38,7 @@ const PRODUCTS: Product[] = [
     name: 'Obsidian Royal Boski',
     category: 'Elite Wash & Wear',
     price: 'PKR 8,500',
-    image: '/235559a993082128adece399fa8d92ac-473599044.jpg',
+    image: './MKS-8336-3-1639371118.jpg',
     details: ['Liquid Ammonia Finish', 'Anti-Crease Technology', 'Luxury Fall & Drape']
   },
   {
@@ -42,7 +46,7 @@ const PRODUCTS: Product[] = [
     name: 'Slate Executive Cotton',
     category: 'Executive Series 2026',
     price: 'PKR 12,900',
-    image: '/2f894674bed7377fa07612de9c67759a-2235079211.jpg',
+    image: './pakistani_gents_shalwar_kameez-2963876879.jpg',
     details: ['100% Giza Cotton', 'High-Density Fine Weave', 'Crisp Executive Finish']
   },
   {
@@ -50,7 +54,7 @@ const PRODUCTS: Product[] = [
     name: 'Maroon Heritage Karandi',
     category: 'Heritage Series',
     price: 'PKR 9,500',
-    image: '/41_9d3f1113-78f0-481f-9cd5-3e12d845849b_1800x1800-2050243805.jpg',
+    image: './235559a993082128adece399fa8d92ac-473599044.jpg',
     details: ['Traditional Long-Staple', 'Starch-Ready Texture', 'Original Heritage 0.5']
   },
   {
@@ -58,7 +62,7 @@ const PRODUCTS: Product[] = [
     name: 'Desert Tan Latha',
     category: 'Winter Collection',
     price: 'PKR 11,200',
-    image: '/7aad2056fb17541456016cf623c6ac70-2904060245.jpg',
+    image: './Wash-Wear-Gents-Shalwar-Qameez-GS45-1.webp',
     details: ['Heavyweight Weave', 'Warm Texture', 'Deep Pigment Dye']
   },
   {
@@ -66,7 +70,7 @@ const PRODUCTS: Product[] = [
     name: 'Royal Sunray Mustard',
     category: 'Cotton Blend',
     price: 'PKR 7,800',
-    image: '/MKS-8336-3-1639371118.jpg',
+    image: './Wash-Wear-Gents-Shalwar-Qameez-GS44-1-2025904109.webp',
     details: ['Folded detailing', 'Self-Print Border', 'Breathable Summer Wear']
   },
   {
@@ -74,7 +78,7 @@ const PRODUCTS: Product[] = [
     name: 'Azure Mist Lawn',
     category: 'Spring Series',
     price: 'PKR 8,900',
-    image: '/SK-48-1-scaled-1123149132.jpg',
+    image: './SK-48-1-scaled-1123149132.jpg',
     details: ['Ultra Light-weight', 'Sky Blue Hue', 'Silky Smooth Finish']
   },
   {
@@ -82,7 +86,7 @@ const PRODUCTS: Product[] = [
     name: 'Rose Dusk Executive',
     category: 'Elite Series',
     price: 'PKR 10,500',
-    image: '/pakistani_gents_shalwar_kameez-2963876879.jpg',
+    image: './41_9d3f1113-78f0-481f-9cd5-3e12d845849b_1800x1800-2050243805.jpg',
     details: ['Soft-Touch Finish', 'Earthy Tones', 'Modern Fit Silhouette']
   },
   {
@@ -90,8 +94,16 @@ const PRODUCTS: Product[] = [
     name: 'Coffee Brown Heritage',
     category: 'Classical Collection',
     price: 'PKR 9,200',
-    image: '/Wash-Wear-Gents-Shalwar-Qameez-GS44-1-2025904109.webp',
+    image: './2f894674bed7377fa07612de9c67759a-2235079211.jpg',
     details: ['Traditional Stitched Look', 'Sturdy Cotton', 'Timeless Appeal']
+  },
+  {
+    id: '9',
+    name: 'Olive Zenith Cotton',
+    category: 'Luxe Series',
+    price: 'PKR 11,800',
+    image: './7aad2056fb17541456016cf623c6ac70-2904060245.jpg',
+    details: ['Premium Olive Hue', 'Mercerized Finish', 'Contemporary Silhouette']
   }
 ];
 
@@ -188,11 +200,11 @@ const Hero = () => {
         style={{ y }}
         className="absolute inset-0 z-0"
       >
-        <img 
-          src="/Wash-Wear-Gents-Shalwar-Qameez-GS45-1.webp" 
-          alt="Luxury Men's Tailoring" 
-          className="w-full h-full object-cover opacity-50 mix-blend-normal scale-105"
-        />
+         <img
+           src="./7aad2056fb17541456016cf623c6ac70-2904060245.jpg"
+           alt="Luxury Men's Tailoring"
+           className="w-full h-full object-cover opacity-50 mix-blend-normal scale-105"
+         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-transparent to-transparent" />
       </motion.div>
 
@@ -300,13 +312,13 @@ const StorySection = () => {
         <div className="relative group story-content">
           <div className="absolute -inset-4 bg-primary/5 blur-3xl rounded-full opacity-10 transition-opacity duration-1000" />
           <AspectRatio ratio={3/4} className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
-            <motion.img 
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.8 }}
-              src="/pakistani_gents_shalwar_kameez-2963876879.jpg" 
-              className="w-full h-full object-cover"
-              alt="Fabric Detail"
-            />
+             <motion.img
+               whileHover={{ scale: 1.05 }}
+               transition={{ duration: 0.8 }}
+               src="./pakistani_gents_shalwar_kameez-2963876879.jpg"
+               className="w-full h-full object-cover"
+               alt="Fabric Detail"
+             />
           </AspectRatio>
         </div>
       </div>
@@ -347,9 +359,9 @@ const ProductGrid = ({ products }: { products: Product[] }) => {
             >
               <Card className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden shadow-2xl transition-all hover:bg-white/10">
                 <AspectRatio ratio={4/5} className="bg-muted relative overflow-hidden">
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
+                  <img
+                    src={product.image}
+                    alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
@@ -405,11 +417,11 @@ const FabricZoomViewer = () => {
                className="w-full h-full cursor-zoom-in relative z-10"
                onClick={() => setZoomLevel(zoomLevel === 1 ? 2.5 : 1)}
              >
-                <img 
-                  src="/Wash-Wear-Gents-Shalwar-Qameez-GS44-1-2025904109.webp" 
-                  alt="Micro Fabric" 
-                  className="w-full h-full object-cover mix-blend-overlay opacity-60"
-                />
+                 <img
+                   src="./Wash-Wear-Gents-Shalwar-Qameez-GS44-1-2025904109.webp"
+                   alt="Micro Fabric"
+                   className="w-full h-full object-cover mix-blend-overlay opacity-60"
+                 />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-black/40"></div>
              </motion.div>
              <div className="absolute bottom-8 right-8 text-right z-20">
@@ -449,9 +461,9 @@ const Footer = () => {
         <div className="space-y-6">
           <h5 className="text-[10px] uppercase font-bold tracking-[0.2em] text-foreground">Contact</h5>
           <div className="space-y-3 text-sm font-light text-[#F8F5F2]/60">
-            <p>Digital Atelier: trinity_coders.dev</p>
-            <p>theo@trinity_coders.dev</p>
-            <p>+00 123 456 7890</p>
+            <p>Atelier Karachi: Korangi Industrial Zone</p>
+            <p>concierge@velvetandloom.com</p>
+            <p>+92 21 3567-8901</p>
           </div>
         </div>
 
